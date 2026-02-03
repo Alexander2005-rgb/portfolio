@@ -17,6 +17,7 @@ function Certificates() {
     credentialId: '',
     credentialUrl: '',
     certificateUrl: '',
+    certificateImage: '',
     description: '',
     category: 'Web Development'
   });
@@ -178,6 +179,7 @@ function Certificates() {
       credentialId: '',
       credentialUrl: '',
       certificateUrl: '',
+      certificateImage: '',
       description: '',
       category: 'Web Development'
     });
@@ -264,6 +266,14 @@ function Certificates() {
                 required
               />
             </div>
+            <div className="form-group">
+              <input
+                type="text"
+                placeholder="Certificate Image URL (optional - image preview)"
+                value={newCertificate.certificateImage}
+                onChange={(e) => setNewCertificate({...newCertificate, certificateImage: e.target.value})}
+              />
+            </div>
             <div className="form-row">
               <div className="form-group">
                 <input
@@ -323,36 +333,58 @@ function Certificates() {
           <div className="certificates-grid">
             {filteredCertificates.map(certificate => (
               <div key={certificate._id} className="certificate-card">
-                <div className="certificate-badge">🏆</div>
-                <h3>{certificate.title}</h3>
-                <p className="certificate-issuer">{certificate.issuer}</p>
-                <p className="certificate-date">{formatDate(certificate.issueDate)}</p>
-                {certificate.description && (
-                  <p className="certificate-description">{certificate.description}</p>
-                )}
-                <div className="certificate-category">
-                  <span className="category-tag">{certificate.category}</span>
-                </div>
-                <div className="certificate-links">
-                  {certificate.certificateUrl && (
-                    <a href={certificate.certificateUrl} target="_blank" rel="noopener noreferrer" className="view-cert-link">
-                      View Certificate
-                    </a>
-                  )}
-                  {certificate.credentialUrl && (
-                    <a href={certificate.credentialUrl} target="_blank" rel="noopener noreferrer" className="view-cert-link">
-                      Verify Credential
-                    </a>
-                  )}
-                </div>
-                {isAuthenticated && (
-                  <div className="certificate-actions">
-                    <button className="edit-btn" onClick={() => handleEditCertificate(certificate)}>
-                      ✎ Edit
-                    </button>
-                    <button className="delete-btn" onClick={() => handleDeleteCertificate(certificate._id)}>
-                      🗑 Delete
-                    </button>
+                {certificate.certificateImage ? (
+                  <div className="certificate-card-image-only">
+                    <img src={certificate.certificateImage} alt={certificate.title} className="certificate-full-image" />
+                    {isAuthenticated && (
+                      <div className="certificate-card-actions">
+                        <button className="edit-btn" onClick={() => handleEditCertificate(certificate)}>
+                          ✎ Edit
+                        </button>
+                        <button className="delete-btn" onClick={() => handleDeleteCertificate(certificate._id)}>
+                          🗑 Delete
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="certificate-card-content">
+                    <div className="certificate-top">
+                      <div className="certificate-badge">🏆</div>
+                      <h3>{certificate.title}</h3>
+                      <p className="certificate-issuer">{certificate.issuer}</p>
+                      <p className="certificate-date">{formatDate(certificate.issueDate)}</p>
+                      <div className="certificate-category">
+                        <span className="category-tag">{certificate.category}</span>
+                      </div>
+                      <div className="certificate-links">
+                        {certificate.certificateUrl && (
+                          <a href={certificate.certificateUrl} target="_blank" rel="noopener noreferrer" className="view-cert-link">
+                            View Certificate
+                          </a>
+                        )}
+                        {certificate.credentialUrl && (
+                          <a href={certificate.credentialUrl} target="_blank" rel="noopener noreferrer" className="view-cert-link">
+                            Verify Credential
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                    <div className="certificate-bottom">
+                      {certificate.description && (
+                        <p className="certificate-description">{certificate.description}</p>
+                      )}
+                      {isAuthenticated && (
+                        <div className="certificate-actions">
+                          <button className="edit-btn" onClick={() => handleEditCertificate(certificate)}>
+                            ✎ Edit
+                          </button>
+                          <button className="delete-btn" onClick={() => handleDeleteCertificate(certificate._id)}>
+                            🗑 Delete
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>

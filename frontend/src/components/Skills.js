@@ -1,29 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './Skills.css';
 
 function Skills() {
   const [skills, setSkills] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchSkills();
-  }, []);
-
-  const fetchSkills = () => {
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-    axios.get(`${apiUrl}/skills`)
-      .then(res => {
-        setSkills(res.data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Error fetching skills:", err);
-        // Set default skills if API fails
-        setSkills(defaultSkills);
-        setLoading(false);
-      });
-  };
 
   const defaultSkills = [
     { name: 'React', category: 'Frontend', icon: '⚛️', level: 'Expert' },
@@ -38,6 +19,25 @@ function Skills() {
      { name: 'Git', category: 'Tools', icon: '🔧', level: 'Advanced' },
     { name: 'Docker', category: 'Tools', icon: '🐳', level: 'Intermediate' },
   ];
+
+  const fetchSkills = useCallback(() => {
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    axios.get(`${apiUrl}/skills`)
+      .then(res => {
+        setSkills(res.data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching skills:", err);
+        // Set default skills if API fails
+        setSkills(defaultSkills);
+        setLoading(false);
+      });
+  }, [defaultSkills]);
+
+  useEffect(() => {
+    fetchSkills();
+  }, [fetchSkills]);
 
   const groupedSkills = {};
   (skills.length > 0 ? skills : defaultSkills).forEach(skill => {

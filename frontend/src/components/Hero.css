@@ -158,6 +158,8 @@
   border: 2px solid white;
   border-radius: 25px;
   transition: all 0.3s ease;
+  background: none;
+  cursor: pointer;
 }
 
 .social-link:hover {

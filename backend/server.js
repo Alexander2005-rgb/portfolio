@@ -32,9 +32,9 @@ app.get('/api/health', (req, res) => {
 });
 
 // MongoDB Connection
-const uri = process.env.ATLAS_URI;
+const uri = process.env.MONGODB_URI;
 if (!uri) {
-    console.error('ATLAS_URI not set in environment variables');
+    console.error('MONGODB_URI not set in environment variables');
     process.exit(1);
 }
 

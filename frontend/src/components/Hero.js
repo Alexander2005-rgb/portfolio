@@ -37,7 +37,7 @@ function Hero() {
           <div className="hero-social">
             <a href="https://github.com/Alexander2005-rgb" className="social-link">GitHub</a>
             <a href="https://www.linkedin.com/feed/" className="social-link">LinkedIn</a>
-            <a href="#" className="social-link">Twitter</a>
+            <button className="social-link" aria-label="Twitter">Twitter</button>
           </div>
         </div>
 
