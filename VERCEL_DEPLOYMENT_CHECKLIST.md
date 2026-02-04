@@ -3,23 +3,30 @@
 ## 🔧 Issues Found & Fixed
 
 ### ✅ FIXED: Hardcoded localhost URLs
+
 **Files Updated:**
+
 - `frontend/src/components/EditProject.js` - Now uses `REACT_APP_API_URL` environment variable
 - `frontend/src/components/CreateProject.js` - Now uses `REACT_APP_API_URL` environment variable
 
 **Change:** Replaced all hardcoded `http://localhost:5000` with:
+
 ```javascript
-const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-axios.get(`${apiUrl}/projects/...`)
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+axios.get(`${apiUrl}/projects/...`);
 ```
 
 ### ✅ FIXED: Frontend proxy configuration
+
 **File:** `frontend/package.json`
+
 - **Removed:** `"proxy": "http://localhost:5000"` (doesn't work on Vercel)
 - **Reason:** Vercel doesn't support proxy in package.json. Use environment variables instead.
 
 ### ✅ UPDATED: Frontend Vercel configuration
+
 **File:** `frontend/vercel.json`
+
 - Cleaned up environment variable section
 - Environment variables will be set in Vercel dashboard (recommended approach)
 
@@ -28,6 +35,7 @@ axios.get(`${apiUrl}/projects/...`)
 ## 📋 Pre-Deployment Steps
 
 ### 1. **Commit Changes to Git**
+
 ```bash
 cd d:\porftfolip
 git add .
@@ -36,7 +44,9 @@ git push origin main
 ```
 
 ### 2. **Push to GitHub**
+
 If not already done:
+
 ```bash
 git remote add origin https://github.com/YOUR_USERNAME/portfolio-fullstack.git
 git branch -M main
@@ -63,12 +73,12 @@ git push -u origin main
    - Go to **Settings** → **Environment Variables**
    - Add these variables:
 
-   | Variable Name | Value |
-   |---|---|
-   | `MONGODB_URI` | Your MongoDB connection string |
-   | `JWT_SECRET` | Your secure JWT secret |
-   | `OWNER_REGISTRATION_CODE` | `portfolio2024secret` |
-   | `NODE_ENV` | `production` |
+   | Variable Name             | Value                          |
+   | ------------------------- | ------------------------------ |
+   | `MONGODB_URI`             | Your MongoDB connection string |
+   | `JWT_SECRET`              | Your secure JWT secret         |
+   | `OWNER_REGISTRATION_CODE` | `portfolio2024secret`          |
+   | `NODE_ENV`                | `production`                   |
 
 6. **Deploy** and wait for completion
 7. **Copy Backend URL:** (e.g., `https://portfolio-backend-xxx.vercel.app`)
@@ -89,8 +99,8 @@ git push -u origin main
    - Go to **Settings** → **Environment Variables**
    - Add this variable:
 
-   | Variable Name | Value |
-   |---|---|
+   | Variable Name       | Value                                 |
+   | ------------------- | ------------------------------------- |
    | `REACT_APP_API_URL` | Your backend Vercel URL (from Step 1) |
 
    **Example:** `https://portfolio-backend-xxx.vercel.app`
@@ -103,10 +113,12 @@ git push -u origin main
 ## 🧪 Testing After Deployment
 
 ### Backend Testing
+
 - Visit: `https://your-backend-url.vercel.app/api/health`
 - Expected response: `{ "status": "API is running" }`
 
 ### Frontend Testing
+
 - Visit your frontend URL
 - Test API calls:
   - View projects (GET `/projects`)
@@ -116,12 +128,15 @@ git push -u origin main
 ### Troubleshooting
 
 **Issue:** CORS errors
+
 - **Solution:** Check `CLIENT_URL` in backend environment variables matches frontend URL
 
 **Issue:** API calls fail with 404
+
 - **Solution:** Verify `REACT_APP_API_URL` is set correctly in frontend environment variables
 
 **Issue:** Build fails
+
 - **Solution:** Check Vercel deployment logs for details
 
 ---
@@ -129,6 +144,7 @@ git push -u origin main
 ## 📝 Environment Variables Reference
 
 ### Backend (.env / Vercel Settings)
+
 ```
 MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/portfolio
 JWT_SECRET=your-very-secure-secret-key-here
@@ -138,6 +154,7 @@ CLIENT_URL=https://your-frontend-url.vercel.app
 ```
 
 ### Frontend (Vercel Settings Only)
+
 ```
 REACT_APP_API_URL=https://your-backend-url.vercel.app
 ```
@@ -147,6 +164,7 @@ REACT_APP_API_URL=https://your-backend-url.vercel.app
 ## ✨ Deployment Complete!
 
 Once both are deployed and environment variables are set:
+
 - ✅ Frontend is accessible
 - ✅ Backend API is running
 - ✅ API calls work correctly
