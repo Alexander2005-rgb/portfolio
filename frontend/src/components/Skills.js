@@ -2,23 +2,23 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './Skills.css';
 
+const defaultSkills = [
+  { name: 'React', category: 'Frontend', icon: '⚛️', level: 'Expert' },
+  { name: 'JavaScript', category: 'Frontend', icon: '📜', level: 'Expert' },
+  { name: 'CSS/SCSS', category: 'Frontend', icon: '🎨', level: 'Expert' },
+  { name: 'C++', category: 'Coding', icon: '🧑‍💻', level: 'Expert' },
+   { name: 'Python', category: 'Coding', icon: '🐍', level: 'Advanced' },
+  { name: 'Node.js', category: 'Backend', icon: '🟢', level: 'Advanced' },
+  
+  { name: 'MongoDB', category: 'Backend', icon: '🍃', level: 'Advanced' },
+  { name: 'Express', category: 'Backend', icon: '⚡', level: 'Advanced' },
+   { name: 'Git', category: 'Tools', icon: '🔧', level: 'Advanced' },
+  { name: 'Docker', category: 'Tools', icon: '🐳', level: 'Intermediate' },
+];
+
 function Skills() {
   const [skills, setSkills] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const defaultSkills = [
-    { name: 'React', category: 'Frontend', icon: '⚛️', level: 'Expert' },
-    { name: 'JavaScript', category: 'Frontend', icon: '📜', level: 'Expert' },
-    { name: 'CSS/SCSS', category: 'Frontend', icon: '🎨', level: 'Expert' },
-    { name: 'C++', category: 'Coding', icon: '🧑‍💻', level: 'Expert' },
-     { name: 'Python', category: 'Coding', icon: '🐍', level: 'Advanced' },
-    { name: 'Node.js', category: 'Backend', icon: '🟢', level: 'Advanced' },
-    
-    { name: 'MongoDB', category: 'Backend', icon: '🍃', level: 'Advanced' },
-    { name: 'Express', category: 'Backend', icon: '⚡', level: 'Advanced' },
-     { name: 'Git', category: 'Tools', icon: '🔧', level: 'Advanced' },
-    { name: 'Docker', category: 'Tools', icon: '🐳', level: 'Intermediate' },
-  ];
 
   const fetchSkills = useCallback(() => {
     const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
@@ -33,7 +33,7 @@ function Skills() {
         setSkills(defaultSkills);
         setLoading(false);
       });
-  }, [defaultSkills]);
+  }, []);
 
   useEffect(() => {
     fetchSkills();

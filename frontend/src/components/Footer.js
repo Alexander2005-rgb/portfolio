@@ -28,8 +28,8 @@ function Footer() {
             <div className="footer-social">
               <a href="https://github.com/Alexander2005-rgb" className="footer-social-link">GitHub</a>
               <a href="https://www.linkedin.com/feed/" className="footer-social-link">LinkedIn</a>
-              <a href="#" className="footer-social-link">Twitter</a>
-              <a href="#" className="footer-social-link">Portfolio</a>
+              <a href="#!" className="footer-social-link">Twitter</a>
+              <a href="#!" className="footer-social-link">Portfolio</a>
             </div>
           </div>
         </div>
