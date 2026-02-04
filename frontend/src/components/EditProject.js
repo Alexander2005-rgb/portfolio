@@ -11,7 +11,7 @@ function EditProject() {
   const { id } = useParams();
 
   useEffect(() => {
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
     axios.get(`${apiUrl}/projects/` + id)
       .then(response => {
         setTitle(response.data.title);
@@ -36,7 +36,7 @@ function EditProject() {
 
     console.log(project);
 
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
     axios.post(`${apiUrl}/projects/update/` + id, project)
       .then(res => console.log(res.data));
 

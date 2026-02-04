@@ -29,7 +29,7 @@ function ProjectsList() {
   }, []);
 
   const fetchProjects = () => {
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
     axios.get(`${apiUrl}/projects`)
       .then(res => {
         setProjects(res.data);
@@ -66,7 +66,7 @@ function ProjectsList() {
       return;
     }
 
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
     
     if (editingId) {
       // Update project
@@ -117,7 +117,7 @@ function ProjectsList() {
   const handleDeleteProject = (projectId) => {
     if (window.confirm('Are you sure you want to delete this project?')) {
       const token = localStorage.getItem('token');
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
       
       axios.delete(`${apiUrl}/projects/${projectId}`, {
         headers: {

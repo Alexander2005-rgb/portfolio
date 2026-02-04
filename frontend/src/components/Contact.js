@@ -26,7 +26,7 @@ function Contact() {
     e.preventDefault();
     setLoading(true);
 
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
     axios.post(`${apiUrl}/contact/add`, formData)
       .then(res => {

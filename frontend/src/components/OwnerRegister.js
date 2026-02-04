@@ -46,7 +46,7 @@ function OwnerRegister() {
     setLoading(true);
 
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
       const response = await axios.post(`${apiUrl}/auth/register-owner`, {
         name: formData.name,
         email: formData.email,
