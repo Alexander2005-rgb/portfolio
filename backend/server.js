@@ -20,11 +20,11 @@ const contactRouter = require('./routes/contact');
 const authRouter = require('./routes/auth');
 const certificatesRouter = require('./routes/certificates');
 
-app.use('/projects', projectsRouter);
-app.use('/skills', skillsRouter);
-app.use('/contact', contactRouter);
-app.use('/auth', authRouter);
-app.use('/certificates', certificatesRouter);
+app.use('/api/projects', projectsRouter);
+app.use('/api/skills', skillsRouter);
+app.use('/api/contact', contactRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/certificates', certificatesRouter);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
