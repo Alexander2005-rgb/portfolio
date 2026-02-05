@@ -5,54 +5,44 @@ require('dotenv').config();
 
 const app = express();
 
-// Middleware
+
 app.use(cors({
   origin: process.env.CLIENT_URL || 'http://localhost:3000',
   credentials: true,
 }));
+
 app.use(express.json());
 
-// Lazy Mongo connection per request (reused across invocations)
-const uri = process.env.MONGODB_URI;
-if (!uri) {
-  // Surface error during initialization if not provided
-  throw new Error('MONGODB_URI not set in environment variables');
+const MONGO_URI = process.env.MONGODB_URI;
+
+if (!MONGO_URI) {
+  console.error('MONGODB_URI not found in environment variables');
+  process.exit(1);
 }
 
-async function ensureDbConnection() {
-  if (mongoose.connection.readyState === 1) return;
-  if (mongoose.connection.readyState === 2) return; // connecting
-  await mongoose.connect(uri);
-}
-
-app.use(async (req, res, next) => {
-  try {
-    await ensureDbConnection();
-    next();
-  } catch (err) {
+mongoose
+  .connect(MONGO_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => {
     console.error('MongoDB connection error:', err);
-    res.status(500).json({ error: 'Database connection failed' });
-  }
-});
+    process.exit(1);
+  });
 
-// Routes
-const projectsRouter = require('./routes/projects');
-const skillsRouter = require('./routes/skills');
-const contactRouter = require('./routes/contact');
-const authRouter = require('./routes/auth');
-const certificatesRouter = require('./routes/certificates');
+app.use('/api/projects', require('./routes/projects'));
+app.use('/api/skills', require('./routes/skills'));
+app.use('/api/contact', require('./routes/contact'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/certificates', require('./routes/certificates'));
 
-app.use('/api/projects', projectsRouter);
-app.use('/api/skills', skillsRouter);
-app.use('/api/contact', contactRouter);
-app.use('/api/auth', authRouter);
-app.use('/api/certificates', certificatesRouter);
-
-// Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({ status: 'API is running' });
 });
 
-// Do not call app.listen in serverless environments.
-// Export the app as the handler for Vercel's Node runtime.
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
 module.exports = app;

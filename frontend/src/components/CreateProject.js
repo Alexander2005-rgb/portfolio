@@ -55,7 +55,7 @@ export default class CreateProject extends Component {
 
     console.log(project);
 
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+    const apiUrl = 'http://localhost:5000/api';
     axios.post(`${apiUrl}/projects/add`, project)
       .then(res => console.log(res.data));
 
