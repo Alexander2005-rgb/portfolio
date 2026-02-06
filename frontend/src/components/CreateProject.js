@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export default class CreateProject extends Component {
   constructor(props) {
     super(props);
@@ -55,7 +58,7 @@ export default class CreateProject extends Component {
 
     console.log(project);
 
-    const apiUrl = 'http://localhost:5000/api';
+    
     axios.post(`${apiUrl}/projects/add`, project)
       .then(res => console.log(res.data));
 

@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Contact.css';
 
+
+const apiUrl = process.env.REACT_APP_API_URL;
+
 function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -26,7 +29,7 @@ function Contact() {
     e.preventDefault();
     setLoading(true);
 
-    const apiUrl = 'http://localhost:5000/api';
+    
 
     axios.post(`${apiUrl}/contact/add`, formData)
       .then(res => {

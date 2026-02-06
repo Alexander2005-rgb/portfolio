@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './OwnerRegister.css';
 import axios from 'axios';
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 function OwnerRegister() {
   const [formData, setFormData] = useState({
     name: '',
@@ -46,7 +48,7 @@ function OwnerRegister() {
     setLoading(true);
 
     try {
-      const apiUrl = 'http://localhost:5000/api';
+     
       const response = await axios.post(`${apiUrl}/auth/register-owner`, {
         name: formData.name,
         email: formData.email,

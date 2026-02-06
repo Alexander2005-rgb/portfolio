@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css';
 
+
+const apiUrl = process.env.REACT_APP_API_URL;
 function Login({ onClose, onLoginSuccess }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,7 +23,7 @@ function Login({ onClose, onLoginSuccess }) {
     }
 
     try {
-      const apiUrl = 'http://localhost:5000/api';
+      
       const response = await axios.post(`${apiUrl}/auth/login`, {
         email,
         password

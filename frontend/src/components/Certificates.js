@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Certificates.css';
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 function Certificates() {
   const [certificates, setCertificates] = useState([]);
   const [filteredCertificates, setFilteredCertificates] = useState([]);
@@ -39,7 +41,7 @@ function Certificates() {
   }, []);
 
   const fetchCertificates = () => {
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+    
     axios.get(`${apiUrl}/certificates`)
       .then(res => {
         setCertificates(res.data);
@@ -76,7 +78,7 @@ function Certificates() {
       return;
     }
 
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+    
 
     if (editingId) {
       // Update certificate
@@ -153,7 +155,7 @@ function Certificates() {
       return;
     }
 
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+    
 
     axios.delete(`${apiUrl}/certificates/${certificateId}`, {
       headers: {

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+
+const apiUrl = process.env.REACT_APP_API_URL;
+
 function EditProject() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -11,7 +14,7 @@ function EditProject() {
   const { id } = useParams();
 
   useEffect(() => {
-    const apiUrl = 'http://localhost:5000/api';
+    
     axios.get(`${apiUrl}/projects/` + id)
       .then(response => {
         setTitle(response.data.title);
@@ -36,7 +39,7 @@ function EditProject() {
 
     console.log(project);
 
-    const apiUrl = 'http://localhost:5000/api';
+    
     axios.post(`${apiUrl}/projects/update/` + id, project)
       .then(res => console.log(res.data));
 
