@@ -82,7 +82,7 @@ function Contact() {
             <div className="social-links">
               <a href="https://github.com/Alexander2005-rgb" className="social-btn">GitHub</a>
               <a href="https://www.linkedin.com/feed/" className="social-btn">LinkedIn</a>
-              <a href="#!" className="social-btn">Twitter</a>
+              <a href="https://leetcode.com/u/Alexander_2005/" className="social-btn">Leetcode</a>
             </div>
           </div>
 

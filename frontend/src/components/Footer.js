@@ -28,14 +28,14 @@ function Footer() {
             <div className="footer-social">
               <a href="https://github.com/Alexander2005-rgb" className="footer-social-link">GitHub</a>
               <a href="https://www.linkedin.com/feed/" className="footer-social-link">LinkedIn</a>
-              <a href="#!" className="footer-social-link">Twitter</a>
+              <a href="https://leetcode.com/u/Alexander_2005/" className="footer-social-link">Leetcode</a>
               <a href="#!" className="footer-social-link">Portfolio</a>
             </div>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {currentYear} Your Name. All rights reserved.</p>
+          <p>&copy; {currentYear} Shivendra Patel. All rights reserved.</p>
           <p>Built with React, Node.js, and MongoDB</p>
         </div>
       </div>
