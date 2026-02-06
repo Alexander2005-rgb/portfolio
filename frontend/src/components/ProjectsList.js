@@ -3,7 +3,9 @@ import axios from 'axios';
 import './ProjectsList.css';
 
 
-const apiUrl = 'http://localhost:5000/api';
+
+const apiUrl = process.env.REACT_APP_API_URL;
+
 
 function ProjectsList() {
   const [projects, setProjects] = useState([]);
