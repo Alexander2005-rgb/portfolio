@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ProjectsList.css';
 
+
+const apiUrl = 'http://localhost:5000/api';
+
 function ProjectsList() {
   const [projects, setProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
@@ -29,7 +32,7 @@ function ProjectsList() {
   }, []);
 
   const fetchProjects = () => {
-    const apiUrl = 'http://localhost:5000/api';
+   
     axios.get(`${apiUrl}/projects`)
       .then(res => {
         setProjects(res.data);
@@ -66,7 +69,7 @@ function ProjectsList() {
       return;
     }
 
-    const apiUrl = 'http://localhost:5000/api';
+ 
     
     if (editingId) {
       // Update project
@@ -117,7 +120,7 @@ function ProjectsList() {
   const handleDeleteProject = (projectId) => {
     if (window.confirm('Are you sure you want to delete this project?')) {
       const token = localStorage.getItem('token');
-      const apiUrl = 'http://localhost:5000/api';
+      
       
       axios.delete(`${apiUrl}/projects/${projectId}`, {
         headers: {
