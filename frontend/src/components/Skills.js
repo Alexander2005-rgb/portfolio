@@ -2,6 +2,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './Skills.css';
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
+
 const defaultSkills = [
   { name: 'React', category: 'Frontend', icon: '⚛️', level: 'Expert' },
   { name: 'JavaScript', category: 'Frontend', icon: '📜', level: 'Expert' },
@@ -21,7 +24,7 @@ function Skills() {
   const [loading, setLoading] = useState(true);
 
   const fetchSkills = useCallback(() => {
-    const apiUrl = 'http://localhost:5000/api';
+    
     axios.get(`${apiUrl}/skills`)
       .then(res => {
         setSkills(res.data);
